@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>世界大师杯排名系统</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      font-family: Orbitron, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 5rem;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .card .rank {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #00eaff;
+    }
+
+    .card .name {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      color: #fff;
+    }
+
+    .card .nationality {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .card .nationality img {
+      height: 20px;
+      margin-right: 8px;
+    }
+
+    .card .result {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 卡片1 -->
+    <div class="card">
+      <div class="rank">1</div>
+      <img src="your-image-path.jpg" alt="选手照片">
+      <div class="name">周胡林</div>
+      <div class="nationality">
+        <img src="assets/flags/cn.png" alt="中国国旗">
+        <span>中国</span>
+      </div>
+      <div class="result">03:50:41</div>
+    </div>
+
+    <!-- 其余7个卡片按照相同结构添加 -->
+    <div class="card">
+      <div class="rank">2</div>
+      <img src="your-image-path.jpg" alt="选手照片">
+      <div class="name">โจวหูหลิน</div>
+      <div class="nationality">
+        <img src="assets/flags/th.png" alt="泰国国旗">
+        <span>泰国</span>
+      </div>
+      <div class="result">04:05:98</div>
+    </div>
+    <!-- 继续为其他选手添加卡片... -->
+  </div>
+
+</body>
+</html>
