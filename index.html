@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>CPU大师巅峰赛 入围选手 / CPU Master Grand Finals Finalist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <script src="./assets/flag-map.js">
+let lastResultHash = "";
+
+async function fetchAndUpdateResult() {
+  const res = await fetch('result.json?_t=' + Date.now());
+  const text = await res.text();
+  const hash = await digestMessage(text);
+
+  if (hash !== lastResultHash) {
+    lastResultHash = hash;
+    try {
+      const json = JSON.parse(text);
+      updateRanking(json);
+    } catch(e) {
+      console.warn("JSON解析失败:", e);
+    }
+  }
+}
+
+async function digestMessage(message) {
+  const msgUint8 = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+setInterval(fetchAndUpdateResult, 5000);
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js">
+let lastResultHash = "";
+
+async function fetchAndUpdateResult() {
+  const res = await fetch('result.json?_t=' + Date.now());
+  const text = await res.text();
+  const hash = await digestMessage(text);
+
+  if (hash !== lastResultHash) {
+    lastResultHash = hash;
+    try {
+      const json = JSON.parse(text);
+      updateRanking(json);
+    } catch(e) {
+      console.warn("JSON解析失败:", e);
+    }
+  }
+}
+
+async function digestMessage(message) {
+  const msgUint8 = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+setInterval(fetchAndUpdateResult, 5000);
+</script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      font-family: Orbitron, sans-serif;
+      overflow-x: hidden;
+    }
+    #tsparticles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('./assets/background.png') center center / cover no-repeat;
+      filter: brightness(0.2) blur(3px);
+      z-index: -2;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.6);
+      border-bottom: 2px solid #00eaff55;
+      box-shadow: 0 0 14px #00eaffaa;
+    }
+    .logo {
+      height: 100px;
+      filter: drop-shadow(0 0 6px #00eaff);
+    }
+    .title-block {
+      flex: 1;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaffaa;
+      line-height: 1.4;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4列布局 */
+      grid-gap: 2rem;
+      max-width: 1280px;
+      margin: 2rem auto;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 18px;
+      box-shadow: 0 0 16px #00eaff55;
+      padding: 1rem;
+      backdrop-filter: blur(6px);
+    }
+    .rank-header {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      color: #00eaff;
+      text-shadow: 0 0 8px #00eaffaa;
+    }
+    .ranking-card {
+      border-radius: 1rem;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+      padding: 1rem;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(4px);
+      transition: transform 0.3s ease;
+    }
+    .ranking-card:hover {
+      transform: scale(1.05);
+    }
+    .card {
+      background: linear-gradient(45deg, rgba(255, 0, 0, 0.6), rgba(0, 0, 255, 0.6));
+      border-radius: 12px;
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .card .rank {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #00eaff;
+      text-align: center;
+    }
+    .card .name {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      color: #ffffff;
+      text-shadow: 0 0 10px #fff;
+      text-align: center;
+    }
+    .card .nationality {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .card .nationality img {
+      height: 20px;
+      margin-right: 8px;
+    }
+    .card .result {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+<div id="particles-js" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;"></div>
+  <div id="tsparticles"></div>
+  <header>
+    <img src="./assets/logo.png" class="logo" />
+    <div class="title-block" id="page-title">
+      <div>CPU大师巅峰赛 入围选手 / CPU Master Grand Finals Finalist</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div id="rankHeader" class="rank-header">排名展示</div>
+    <div id="rankingTable" class="fade show"></div>
+  </div>
+
+<script>
+(async function () {
+  try {
+    const title = await fetch("./title.json").then(res => res.json());
+    document.getElementById("page-title").innerHTML = `
+      <div>${title.zh || "CPU大师巅峰赛"}</div>
+      <div style="font-size:0.8em;margin-top:4px;">${title.en || "CPU Master Grand Finals Finalist"}</div>
+    `;
+
+    tsParticles.load("tsparticles", {
+      particles: { number: { value: 80 }, size: { value: 3 }, move: { enable: true }, line_linked: { enable: true } },
+      background: { color: "#000" }
+    });
+
+    const raw = await fetch("./result.json").then(res => res.json());
+    const allRows = raw.map(r => {
+      const timeParts = r.result.split(":").map(Number);
+      return {
+        name: r.name,
+        nationality: r.nationality,
+        result: r.result,
+        time: (timeParts[0] || 0) * 3600 + (timeParts[1] || 0) * 60 + (timeParts[2] || 0)
+      };
+    }).sort((a, b) => a.time - b.time);
+
+    let rankingHtml = '';
+    allRows.forEach((row, index) => {
+      rankingHtml += `
+        <div class="card">
+          <div class="rank">${index + 1}</div>
+          <img src="assets/images/${row.name}.jpg" alt="选手照片">
+          <div class="name">${row.name}</div>
+          <div class="nationality">
+            <img src="assets/flags/${row.nationality.toLowerCase()}.png" alt="${row.nationality} flag">
+            <span>${row.nationality}</span>
+          </div>
+          <div class="result">${row.result}</div>
+        </div>
+      `;
+    });
+
+    document.getElementById("rankingTable").innerHTML = rankingHtml;
+
+  } catch (err) {
+    console.error("数据加载失败:", err);
+  }
+})();
+</script>
+
+</body>
+</html>
