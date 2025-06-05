@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>世界大师杯排名系统</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: 'Orbitron', sans-serif;
+      color: #0ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      margin: 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    header h2 {
+      font-size: 18px;
+      color: #888;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 20px;
+      width: 90%;
+      max-width: 1600px;
+    }
+    .card {
+      background: rgba(0,255,255,0.06);
+      border: 1px solid #0ff;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #222;
+    }
+    .card .name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 8px;
+      color: #0ff;
+    }
+    .card .nation {
+      font-size: 14px;
+      margin: 4px 0;
+      color: #ccc;
+    }
+    .card .result {
+      font-size: 14px;
+      color: #0ff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title_zh">世界大师杯 · 决赛排名</h1>
+    <h2 id="title_en">World Masters Cup · Finals</h2>
+  </header>
+  <div class="grid" id="rankingGrid"></div>
+
+  <script type="module">
+    async function fetchTitle() {
+      try {
+        const res = await fetch('title.json');
+        const json = await res.json();
+        document.getElementById('title_zh').textContent = json.zh;
+        document.getElementById('title_en').textContent = json.en;
+      } catch (e) {
+        console.warn('未能加载标题，使用默认');
+      }
+    }
+
+    async function loadRanking() {
+      try {
+        const res = await fetch('result.json?_t=' + Date.now());
+        const data = await res.json();
+        const container = document.getElementById('rankingGrid');
+        container.innerHTML = '';
+        data.slice(0, 8).forEach(player => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <img src="${player.photo}" alt="头像" />
+            <div class="name">${player.athlete_name}</div>
+            <div class="nation">${flagImg}${player.nationality}</div>
+            <div class="result">上轮成绩：${player.previous_result}</div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (e) {
+        document.body.innerHTML = '<h2 style="color:red;">加载失败：' + e.message + '</h2>';
+        console.error('加载失败：', e);
+      }
+    }
+
+    fetchTitle();
+    loadRanking();
+  </script>
+</body>
+</html>
+</div></div>
+
+<script>
+(async function () {
+  try {
+    const title = await fetch("./title.json").then(res => res.json());
+    document.getElementById("page-title").innerHTML = `
+      <div>${title.zh || "CPU大师竞技赛"}</div>
+      <div style="font-size:0.8em;margin-top:4px;">${title.en || "CPU Master Competition"}</div>
+    `;
+
+    tsParticles.load("tsparticles", {
+      particles: { number: { value: 80 }, size: { value: 3 }, move: { enable: true }, line_linked: { enable: true } },
+      background: { color: "#000" }
+    });
+
+    const data = await fetch("./result.json").then(res => res.json());
+    const container = document.getElementById("rankingTable");
+    container.innerHTML = "";
+    container.classList.add("grid-card");
+    data.slice(0, 8).forEach(player => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${player.photo}" alt="头像" />
+        <div class="name">${player.athlete_name}</div>
+        <div class="nation">${player.nationality}</div>
+        <div class="result">上轮成绩：${player.previous_result}</div>
+      `;
+      container.appendChild(card);
+    });
+  } catch (err) {
+    document.getElementById("page-title").innerHTML = "加载失败：JS异常";
+    console.error("JS执行出错：", err);
+  }
+})();
+</script>
+
+<style>
+.grid-card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 2rem;
+}
+.card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid #00eaff88;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 10px #00eaff55;
+}
+.card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: #111;
+}
+.card .name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00ffff;
+}
+.card .nation {
+  font-size: 1rem;
+  margin: 0.4rem 0;
+}
+.card .result {
+  font-size: 0.9rem;
+  color: #0ff;
+}
+</style>
+
+</body>
+</html>
