@@ -1,0 +1,58 @@
+[
+  {
+    "number": 1,
+    "name": "周胡林",
+    "nationality": "中国",
+    "result": "03:50:41",
+    "photo": "./assets/photos/1.jpg"
+  },
+  {
+    "number": 2,
+    "name": "โจวหูหลิน",
+    "nationality": "泰国",
+    "result": "04:05:98",
+    "photo": "./assets/photos/2.jpg"
+  },
+  {
+    "number": 3,
+    "name": "झोउ हू लिन",
+    "nationality": "印度",
+    "result": "05:38:64",
+    "photo": "./assets/photos/3.jpg"
+  },
+  {
+    "number": 4,
+    "name": "Brazilian Portuguese",
+    "nationality": "巴西",
+    "result": "04:54:21",
+    "photo": "./assets/photos/4.jpg"
+  },
+  {
+    "number": 5,
+    "name": "Zhou Hu Lin",
+    "nationality": "马来西亚",
+    "result": "05:54:24",
+    "photo": "./assets/photos/5.jpg"
+  },
+  {
+    "number": 6,
+    "name": "Чжоу Ху Линь",
+    "nationality": "俄罗斯",
+    "result": "06:54:28",
+    "photo": "./assets/photos/6.jpg"
+  },
+  {
+    "number": 7,
+    "name": "جو هو لين",
+    "nationality": "埃及",
+    "result": "09:10:47",
+    "photo": "./assets/photos/7.jpg"
+  },
+  {
+    "number": 8,
+    "name": "Châu Hồ Lâm",
+    "nationality": "越南",
+    "result": "08:38:29",
+    "photo": "./assets/photos/8.jpg"
+  }
+]
